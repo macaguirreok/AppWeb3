@@ -1,0 +1,28 @@
+extends ./index
+
+block contenido
+    .flex.justify-end.mb-4
+        ul.flex.space-x-4
+            span
+                a(href="/cursos/listarCursos" class="text-gray-600 hover:text-gray-800") Volver al listado
+
+    .py-10
+        h1.text-center.text-2xl.font-extrabold= "Modificar Curso"
+
+        form(action=`/cursos/modificarCurso/${curso.id}`, method="POST" class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4")
+            input(type="hidden", name="_method", value="PUT")
+            div.mb-4
+                label(for="nombre" class="block text-gray-700 text-sm font-bold mb-2") Nombre:
+                input(type="text" name="nombre" value=curso.nombre required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            
+            div.mb-4
+                label(for="descripcion" class="block text-gray-700 text-sm font-bold mb-2") Descripción:
+                input(type="text" name="descripcion" value=curso.descripcion required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            
+            div.mb-4
+                label(for="profesor_id" class="block text-gray-700 text-sm font-bold mb-2") Profesor:
+                select(name="profesor_id" required class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+                    each profesor in profesores
+                        option(value=profesor.id selected=(curso.profesor && curso.profesor.id == profesor.id) ? true : false)= profesor.nombre + " " + profesor.apellido
+
+            button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") Actualizar Curso

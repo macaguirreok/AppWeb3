@@ -1,0 +1,43 @@
+extends ./index
+
+block contenido
+    .flex.justify-end.mb-4
+        ul.flex.space-x-4
+            span
+                a(href="/profesores/listarProfesores" class="text-gray-600 hover:text-gray-800") Volver al listado
+
+    .py-10
+        h1.text-4xl.my-10.font-extrabold.text-center= pagina
+
+        // Mostrar errores si hay
+        if errores && errores.length > 0
+            .alert.alert-danger
+                each error in errores
+                    p= error.msg
+
+        form(action=`/profesores/${profesor.id}`, method="POST" class="max-w-lg mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4")
+            input(type="hidden", name="_method", value="PUT")
+
+            div.mb-4
+                label(for="dni" class="block text-gray-700 text-sm font-bold mb-2") DNI:
+                input(type="text", id="dni", name="dni", required value=profesor.dni class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            div.mb-4
+                label(for="nombre" class="block text-gray-700 text-sm font-bold mb-2") Nombre:
+                input(type="text", id="nombre", name="nombre", required value=profesor.nombre class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            div.mb-4
+                label(for="apellido" class="block text-gray-700 text-sm font-bold mb-2") Apellido:
+                input(type="text", id="apellido", name="apellido", required value=profesor.apellido class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            div.mb-4
+                label(for="email" class="block text-gray-700 text-sm font-bold mb-2") Email:
+                input(type="email", id="email", name="email", required value=profesor.email class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            div.mb-4
+                label(for="profesion" class="block text-gray-700 text-sm font-bold mb-2") Profesión:
+                input(type="text", id="profesion", name="profesion", required value=profesor.profesion class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            div.mb-4
+                label(for="telefono" class="block text-gray-700 text-sm font-bold mb-2") Teléfono:
+                input(type="text", id="telefono", name="telefono", required value=profesor.telefono class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline")
+            button(type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline") Modificar Profesor
+
+block scripts
+    script.
+        console.log('Script adicional para modificarProfesor')
